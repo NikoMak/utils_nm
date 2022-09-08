@@ -3,7 +3,7 @@
 <!--next-version-placeholder-->
 
 <!--
-## v0.0.2 (YYYY-MM-DD)
+## v0.0.4 (YYYY-MM-DD)
 
 ### Features
 
@@ -13,6 +13,11 @@
 
 - fix in ...
 -->
+## v0.0.4 (2022-09-08)
+
+### Features
+
+- add "check first" logic when creating orm tables
 
 ## v0.0.2 (2022-09-08)
 

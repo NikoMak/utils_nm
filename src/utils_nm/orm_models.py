@@ -51,8 +51,8 @@ class BaseClass:
         """
 
         if recreate:
-            cls.__table__.drop(engine)
-        cls.__table__.create(engine)
+            cls.__table__.drop(engine, checkfirst=True)
+        cls.__table__.create(engine, checkfirst=True)
 
         return None
 
