@@ -51,8 +51,8 @@ class BaseClass:
         """
 
         if recreate:
-            cls.metadata.drop_all(engine)
-        cls.metadata.create_all(engine)
+            cls.__table__.drop(engine)
+        cls.__table__.create(engine)
 
         return None
 
