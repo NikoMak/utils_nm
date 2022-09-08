@@ -62,6 +62,7 @@ class Email:
                 message = f'Subject: {subject}\n\n{body}'
                 try:
                     server.sendmail(self.address, mail_to, message)
+                    return None
                 except smtplib.SMTPException as ex:
                     self.logger.exception('an error occurred!')
                     raise ex

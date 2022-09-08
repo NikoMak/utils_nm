@@ -15,6 +15,12 @@
 -->
 ## v0.0.4 (2022-09-08)
 
+### Fix
+
+- rectify send_email method of Email class to stop the code in case of a debug server at localhost
+
+## v0.0.3 (2022-09-08)
+
 ### Features
 
 - add "check first" logic when creating orm tables
