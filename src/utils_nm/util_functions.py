@@ -5,12 +5,13 @@
 Functions which serve for general purposes
 """
 
+import typing
 import inspect
 import logging
 import warnings
 import traceback
 from pathlib import Path
-from datetime import datetime
+from datetime import datetime, timedelta
 
 
 # ______________________________________________________________________________________________________________________
@@ -184,5 +185,178 @@ def format_email_error_message(exception: Exception, project: str, wd: Path, log
     e_mail_message = e_mail_message.replace('{{ log_file_path }}', str(log_file_path.resolve()))
 
     return e_mail_subject, e_mail_message
+
+# ______________________________________________________________________________________________________________________
+
+
+def chunker(seq: typing.Sequence, size: int) -> typing.Generator:
+    """
+    creates a generator object of the sequence in fixed size chunks
+
+    Args:
+        seq: the input sequence
+        size: the chunk size (last chunk will only contain the leftover)
+
+    Returns:
+        generator object with chunked sequence elements of the specified size
+    """
+
+    return (seq[pos:pos + size] for pos in range(0, len(seq), size))
+
+
+# ______________________________________________________________________________________________________________________
+
+
+def last_day_of_month(any_date: datetime.date) -> datetime.date:
+    """
+    calculates the last day of the month for the supplied date
+
+    Args:
+        any_date: the input date
+
+    Returns:
+        date of the last day from that month
+    """
+
+    next_month = any_date.replace(day=28) + timedelta(days=4)  # this will never fail
+    return next_month - timedelta(days=next_month.day)
+
+
+# ______________________________________________________________________________________________________________________
+
+
+def date_to_integer(any_date: datetime.date) -> int:
+    """
+    converts any date object to integer
+
+    Args:
+        any_date: the date which should be converted to int
+
+    Returns:
+        date as int
+    """
+    return (10000 * any_date.year) + (100 * any_date.month) + any_date.day
+
+
+# ______________________________________________________________________________________________________________________
+
+
+def display_formatted_time(seconds: int, granularity: str = 's') -> str:
+    """
+    outputs a string of the time passed in second, minutes, hours, days, weeks
+
+    Args:
+        seconds: the time passed in seconds
+        granularity: controls how much unit details should be shown. Default 's' shows all non-zero units
+
+    Returns:
+        formatted string with elapsed time
+    """
+
+    result = []
+
+    d_granularity = {s: i for s, i in zip(['w', 'd', 'h', 'm', 's'], [1, 2, 3, 4, 5])}
+    granularity = d_granularity[granularity]
+
+    intervals = (
+        ('w', 604800),  # 60 * 60 * 24 * 7
+        ('d', 86400),  # 60 * 60 * 24
+        ('h', 3600),  # 60 * 60
+        ('m', 60),
+        ('s', 1),
+    )
+
+    seconds = int(round(seconds))
+    if seconds == 0:
+        return '0 s'
+
+    for name, count in intervals:
+        value = seconds // count
+        if value:
+            seconds -= value * count
+            result.append(f'{value} {name}')
+
+    return ', '.join(result[:granularity])
+
+
+# ______________________________________________________________________________________________________________________
+
+
+def clean_umlauts(s: str | list) -> str | list:
+    """
+    replaces some German, French, Slavic umlauts to plain english characters
+
+    Args:
+        s: the input string or list of strings
+
+    Returns:
+        input object with replaced umlauts
+    """
+
+    d_trans = {
+        'Ä': 'Ae',
+        'Ü': 'Ue',
+        'Ö': 'Oe',
+        'É': 'E',
+        'È': 'E',
+        'À': 'A',
+        'Ó': 'O',
+        'Â': 'A',
+        'Ê': 'e',
+        'Ç': 'C',
+        'Ć': 'C',
+        'Č': 'C',
+
+        'ä': 'ae',
+        'ü': 'ue',
+        'ö': 'oe',
+        'é': 'e',
+        'è': 'e',
+        'à': 'a',
+        'ó': 'o',
+        'â': 'a',
+        'ê': 'e',
+        'ç': 'c',
+        'ć': 'c',
+        'č': 'c'
+    }
+
+    for key, val in d_trans.items():
+        if isinstance(s, str):
+            s = s.replace(key, val)
+
+        elif isinstance(s, list):
+            s = [el.replace(key, val) for el in s]
+
+    return s
+
+
+# ______________________________________________________________________________________________________________________
+
+
+def calc_equidistant_weights(n: int) -> list:
+    """
+    calculates the equidistant weights for n inputs. Sum of all weights equals 1
+
+    Args:
+        n: the number of weights needed
+
+    Returns:
+        list of equidistant weights
+    """
+
+    if n < 2:
+        print('n needs to be at least 2')
+        return [1]
+
+    unidist = ((1 / n) / 2) / (n // 2)
+
+    if n % 2 == 0:
+        rng = [i for i in range(-(n // 2), n // 2 + 1) if i != 0]
+    else:
+        rng = [i for i in range(-(n // 2), n // 2 + 1)]
+
+    return [round(1 / n + i * unidist, 10) for i in reversed(rng)]
+
 
 # ______________________________________________________________________________________________________________________

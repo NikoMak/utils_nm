@@ -8,6 +8,7 @@ The following modules can be imported:
 - orm_models: sqlalchemy orm models for logging purposes of job executions
 - util_classes: useful classes
 - util_functions: useful functions
+- util_decorators: useful decorator functions, classes, factories
 
 To use (with caution), simply do:
 
