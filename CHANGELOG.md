@@ -11,6 +11,14 @@
 - fix in ...
 -->
 
+
+## v0.2.0 (2022-09-20)
+### Features
+- added `active` column in orm model `JboSchedule`
+- added orm base class method: `select_all`
+- added orm base class method `select_filtered`
+
+
 ## v0.1.0 (2022-09-09)
 ### Features
 - added util function: `chunker`
@@ -20,6 +28,7 @@
 - added util function: `clean_umlauts`
 - added util function: `calc_equidistant_weights`
 - added `util_decorators` module
+
 
 ## v0.0.4 (2022-09-08)
 ### Fix

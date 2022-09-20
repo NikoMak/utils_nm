@@ -56,6 +56,50 @@ class BaseClass:
 
         return None
 
+    @classmethod
+    def select_all(cls, engine: sa.engine.Engine) -> list[object]:
+        """
+        retrieves all rows as orm instances to a list
+
+        Args:
+            engine: the sqlalchemy engine used to connect to the database
+
+        Returns:
+            list of all object instances
+        """
+        with Session(engine) as session:
+            session.expire_on_commit = False  # keep the instance accessible after session closes
+            stmt = sa.select(cls)
+            rows = session.execute(stmt).all()
+            session.commit()
+            rows = [r[0] for r in rows]
+
+        return rows
+
+    @classmethod
+    def select_filtered(cls, engine: sa.engine.Engine, verbose: bool = False, **kwargs) -> list[object]:
+        """
+        retrieves filtered rows as orm instances to a list
+
+        Args:
+            engine: the sqlalchemy engine used to connect to the database
+            verbose: if true print the generated sql statement
+            **kwargs: the key value pairs corresponding to table colum and colum value to filter
+
+        Returns:
+            filtered list of object instances
+        """
+        with Session(engine) as session:
+            session.expire_on_commit = False  # keep the instance accessible after session closes
+            stmt = sa.select(cls).filter_by(**kwargs)
+            if verbose:
+                print(stmt)
+            rows = session.execute(stmt).all()
+            session.commit()
+            rows = [r[0] for r in rows]
+
+        return rows
+
     def add(self, engine: sa.engine.Engine) -> object:
         """
         writes the current instance to the database
@@ -141,6 +185,7 @@ class JobSchedule(Base, BaseClass):
     env = sa.Column(sa.String(255), nullable=False)
     schedule = sa.Column(sa.String(255), nullable=False)
     priority = sa.Column(sa.SmallInteger, nullable=True)
+    active = sa.Column(sa.Boolean, default=True, nullable=False)
 
     def __repr__(self):
         schedule = zip(self.schedule.split(), ['minute', 'hour', 'day', 'month', 'weekday'])
