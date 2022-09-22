@@ -48,7 +48,7 @@ def create_db_engine(db_cfg: dict, db_conn_info: dict, db_name: str = None) -> t
         conn_str = db_cfg[db_name]['driver'] + ':///'
     conn_str += str(db_conn_info[db_name])
 
-    engine = sa.create_engine(conn_str)
+    engine = sa.create_engine(conn_str, future=True)
 
     return DB(db_name=db_name, engine=engine)
 
@@ -72,7 +72,8 @@ def execute_raw_sql(qry: str, con: sa.engine.Connection | sa.engine.Engine) -> N
     if con_type == 'Engine':
         con = con.connect()
     try:
-        con.execute(qry)
+        con.execute(sa.text(qry))
+        con.commit()
     except Exception as ex:
         raise ex
     finally:

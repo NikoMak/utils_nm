@@ -3,13 +3,22 @@
 <!--next-version-placeholder-->
 
 <!--
-## v0.1.1 (YYYY-MM-DD)
+## v0.2.2 (YYYY-MM-DD)
 ### Features
 - feat in ...
 
 ### Fix
 - fix in ...
 -->
+
+
+## v0.2.1 (2022-09-22)
+### Features
+- added util function: `determine_default_value_for_argparse`
+
+### Fix
+- fix `db_functions.execute_raw_sql()` where the statement was not being committed
+- fix `util_functions.input_promt()` from for the case where a default is provided without choices
 
 
 ## v0.2.0 (2022-09-20)

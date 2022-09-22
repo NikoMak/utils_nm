@@ -62,7 +62,7 @@ def check_if_in_argv(arg, argument) -> bool:
 
 def parse_bool(arg: str) -> bool:
     """
-    parse a script argument to a boolean value.
+    parse a script argument to a boolean value
 
     Args:
         arg: the input argument
@@ -84,7 +84,7 @@ def parse_bool(arg: str) -> bool:
 
 def input_prompt(name: str, choices: tuple = (None, ), default: object = None, enum: bool = False) -> object:
     """
-    wrapper for pythons input() with choices, default value and continuous prompting if an invalid input was supplied.
+    wrapper for pythons input() with choices, default value and continuous prompting if an invalid input was supplied
 
     Args:
         name: the name of the variable
@@ -98,11 +98,14 @@ def input_prompt(name: str, choices: tuple = (None, ), default: object = None, e
 
     print(f'please set the {name}:')
     inp = None
-    if choices == (None, ):
+    if choices == (None, ) and default is None:
         inp = input()
+    elif choices == (None, ) and default is not None:
+        inp = input(f'\t-> defaults to: {default}')
+        inp = default if inp == '' else inp
     elif not enum:
         while inp not in choices:
-            inp = input(f'\t-> choose between [{", ".join(str(e) for e in choices)}], default to: {default} ')
+            inp = input(f'\t-> choose between [{", ".join(str(e) for e in choices)}], defaults to: {default} ')
             inp = default if inp == '' else inp
         print()
     else:
@@ -118,6 +121,41 @@ def input_prompt(name: str, choices: tuple = (None, ), default: object = None, e
             inp = available_choices[int(inp)]
 
     return inp
+
+
+# ______________________________________________________________________________________________________________________
+
+
+def determine_default_value_for_argparse(
+        repl: bool, arg_name: tuple, choices: tuple = (None, ), default: object = None, enum: bool = False
+) -> object:
+    """
+    only use for argparse.add_argument default value
+    this function determines the default value based on execution mode and user input
+
+    Args:
+        repl: whether the script is executed in interactive repl (read-evaluate-print-loop) mode
+        arg_name: the name of the arguments, e.g. ('-arg', '--argument')
+        choices: the allowed values for input. If None, anything can be input
+        default: the default value. If None, the user will continue to be prompted
+        enum: enumerate the choices and allow for numerical input
+
+    Returns:
+        the determined default value
+    """
+
+    arg_name = tuple(arg.lstrip('-') for arg in arg_name)
+    determined_default = default
+    if repl:
+        determined_default = input_prompt(arg_name[-1], choices, default, enum)
+    else:
+        if not check_if_in_argv(*arg_name):
+            if default is not None:
+                determined_default = default
+            else:
+                determined_default = input_prompt(arg_name[-1], choices, default, enum)
+
+    return determined_default
 
 
 # ______________________________________________________________________________________________________________________
