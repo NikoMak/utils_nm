@@ -3,13 +3,18 @@
 <!--next-version-placeholder-->
 
 <!--
-## v0.2.2 (YYYY-MM-DD)
+## v0.3.0 (YYYY-MM-DD)
 ### Features
 - feat in ...
 
 ### Fix
 - fix in ...
 -->
+
+
+## v0.3.0 (2022-09-22)
+### Features
+- added `util_context_managers` module
 
 
 ## v0.2.1 (2022-09-22)
