@@ -56,23 +56,28 @@ def create_db_engine(db_cfg: dict, db_conn_info: dict, db_name: str = None) -> t
 # ______________________________________________________________________________________________________________________
 
 
-def execute_raw_sql(qry: str, con: sa.engine.Connection | sa.engine.Engine) -> None:
+def execute_raw_sql(qry: str | sa.sql.elements.TextClause, con: sa.engine.Connection | sa.engine.Engine) -> None:
     """
     Executes a sql statement and does not return anything
 
     Args:
-        qry: the sql query to be executed
+        qry: the sql query to be executed, either a string or sqlalchemy text clause
         con: either the sqlalchemy connection or engine to the database
 
     Returns:
         Executes and commits the statement against the database and returns None
     """
 
+    if type(qry).__name__ == 'str':
+        qry = sa.text(qry)
+    elif type(qry).__name__ != 'TextClause':
+        raise TypeError('argument qry must be either a string or sqlalchemy.text!')
+
     con_type = type(con).__name__
     if con_type == 'Engine':
         con = con.connect()
     try:
-        con.execute(sa.text(qry))
+        con.execute(qry)
         con.commit()
     except Exception as ex:
         raise ex

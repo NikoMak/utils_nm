@@ -3,13 +3,22 @@
 <!--next-version-placeholder-->
 
 <!--
-## v0.3.0 (YYYY-MM-DD)
+## v0.3.3 (YYYY-MM-DD)
 ### Features
 - feat in ...
 
 ### Fix
 - fix in ...
 -->
+
+## v0.3.2 (2022-09-22)
+### Fix
+- fix documentation for `execute_raw_sql`
+
+
+## v0.3.1 (2022-09-22)
+### Features
+- improve `execute_raw_sql` to accept string or sqlalchemy text clause
 
 
 ## v0.3.0 (2022-09-22)
