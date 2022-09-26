@@ -5,7 +5,11 @@
 Functions which serve for database purposes
 """
 
+import warnings
+import pandas as pd
+from tqdm import tqdm
 import sqlalchemy as sa
+from sqlalchemy import exc
 from collections import namedtuple
 
 from .util_functions import input_prompt
@@ -87,5 +91,48 @@ def execute_raw_sql(qry: str | sa.sql.elements.TextClause, con: sa.engine.Connec
 
     return None
 
+
+# ______________________________________________________________________________________________________________________
+
+
+def loop_insert_df_to_table(
+        df: pd.DataFrame,
+        tbl_name: str,
+        tbl_schema: str,
+        con: sa.engine.Connection | sa.engine.Engine,
+        if_exists: str = 'append',
+        verbose: bool = False,
+) -> list:
+    """
+    inserts rows to a database table in a loop
+
+    Args:
+        df: the dataframe which should be inserted
+        tbl_name: the name of the database table
+        tbl_schema: the name of the database schema where the table is located
+        con: either the sqlalchemy connection or engine to the database
+        if_exists: what to do if the table already exists
+        verbose: whether to show a loop progress bar and print statements
+
+    Returns:
+        a list with the indexes of the rows which where NOT inserted due to integrity errors
+    """
+
+    dup_rows = []
+    len_df = len(df)
+    sequence = tqdm(range(len_df)) if verbose else range(len_df)
+    for i in sequence:
+        try:
+            df.loc[i:i].to_sql(tbl_name, schema=tbl_schema, index=False, con=con, if_exists=if_exists, method=None)
+        except exc.IntegrityError:
+            dup_rows.append(i)
+    if len(dup_rows) > 0:
+        warnings.warn(f'{len(dup_rows)} integrity error(s) due to duplicate row(s)')
+    if verbose:
+        stmt = f'{len_df - len(dup_rows)} row(s) inserted'
+        stmt += f', {len(dup_rows)} duplicate row(s) where not inserted' if len(dup_rows) > 0 else ''
+        print(stmt)
+
+    return dup_rows
 
 # ______________________________________________________________________________________________________________________

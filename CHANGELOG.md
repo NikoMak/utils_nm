@@ -1,15 +1,18 @@
 # Changelog
 
-<!--next-version-placeholder-->
-
 <!--
-## v0.3.3 (YYYY-MM-DD)
+## v0.4.1 (YYYY-MM-DD)
 ### Features
 - feat in ...
 
 ### Fix
 - fix in ...
 -->
+
+## v0.4.0 (2022-09-26)
+### Features
+- added db function: `loop_insert_df_to_table`
+
 
 ## v0.3.2 (2022-09-22)
 ### Fix
