@@ -1,13 +1,21 @@
 # Changelog
 
 <!--
-## v0.4.1 (YYYY-MM-DD)
+## v0.4.3 (YYYY-MM-DD)
 ### Features
 - feat in ...
 
 ### Fix
 - fix in ...
 -->
+
+## v0.4.2 (2022-09-29)
+### Fix
+- improve `db_functions.loop_insert_df_to_table()` by ensuring the index of the dataframe is reset before loop
+
+
+## v0.4.1 (2022-09-29)
+### Forgot to apply changes, use v0.4.2
 
 ## v0.4.0 (2022-09-26)
 ### Features

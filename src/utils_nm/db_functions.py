@@ -120,6 +120,7 @@ def loop_insert_df_to_table(
 
     dup_rows = []
     len_df = len(df)
+    df.reset_index(drop=True, inplace=True)
     sequence = tqdm(range(len_df)) if verbose else range(len_df)
     for i in sequence:
         try:
