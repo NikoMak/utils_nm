@@ -31,7 +31,7 @@ class StartTime:
 
 
 class Email:
-    def __init__(self, server: str, port: int, address: str, password: str, logger: logging.Logger):
+    def __init__(self, server: str, port: int, address: str, password: str | None, logger: logging.Logger):
         self.server = server
         self.port = port
         self.address = address

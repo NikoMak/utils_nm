@@ -9,6 +9,11 @@
 - fix in ...
 -->
 
+## v0.4.3 (2022-09-30)
+### Docu
+- improve static typing for `util_classes.Email`
+
+
 ## v0.4.2 (2022-09-29)
 ### Fix
 - improve `db_functions.loop_insert_df_to_table()` by ensuring the index of the dataframe is reset before loop
