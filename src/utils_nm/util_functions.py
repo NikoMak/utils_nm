@@ -5,13 +5,46 @@
 Functions which serve for general purposes
 """
 
+import sys
+import psutil
+from pathlib import Path
+
 import typing
 import inspect
+
 import logging
 import warnings
 import traceback
-from pathlib import Path
+
 from datetime import datetime, timedelta
+
+
+# ______________________________________________________________________________________________________________________
+
+
+def determine_main_script_path() -> str:
+    """
+    Determines the path of the main script using psutil.Process().cmdline()
+
+    Returns:
+        a pathlib.Path object with the path to the main script
+    """
+    args = psutil.Process().cmdline()
+    if len(args) > 1:
+        path = args[1]
+    else:
+        path = args[0]
+    return path
+
+
+def runs_in_repl_mode() -> bool:
+    """
+    Determines if the execution is in repl (read-evaluate-print-loop) mode.
+
+    Returns:
+        True if reple else False
+    """
+    return hasattr(sys, 'ps1') or Path(determine_main_script_path()).name == 'pydevconsole.py'
 
 
 # ______________________________________________________________________________________________________________________

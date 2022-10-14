@@ -1,13 +1,18 @@
 # Changelog
 
 <!--
-## v0.4.3 (YYYY-MM-DD)
+## v0.5.1 (YYYY-MM-DD)
 ### Features
 - feat in ...
 
 ### Fix
 - fix in ...
 -->
+## v0.5.0 (2022-10-14)
+### Features
+- added util function: `determine_main_script_path`
+- added util function: `runs_in_repl_mode`
+
 
 ## v0.4.3 (2022-09-30)
 ### Docu
