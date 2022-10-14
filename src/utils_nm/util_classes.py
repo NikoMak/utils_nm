@@ -5,9 +5,11 @@
 Classes which serve for general purposes
 """
 
-import ssl
 import time
+
 import logging
+
+import ssl
 import smtplib
 from email.message import EmailMessage
 

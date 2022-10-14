@@ -6,11 +6,13 @@ Functions which serve for database purposes
 """
 
 import warnings
+
+from collections import namedtuple
 import pandas as pd
 from tqdm import tqdm
+
 import sqlalchemy as sa
 from sqlalchemy import exc
-from collections import namedtuple
 
 from .util_functions import input_prompt
 

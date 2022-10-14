@@ -159,6 +159,40 @@ def input_prompt(name: str, choices: tuple = (None, ), default: object = None, e
 # ______________________________________________________________________________________________________________________
 
 
+def prompt_file_name(open_or_save: str = 'open') -> str:
+    """
+    Prompts the user to select a file.
+
+    Args:
+        open_or_save: whether it should prompt for an existing file (open) or to save a new file (save)
+
+    Returns:
+        the path to the file
+    """
+    file_path = None
+    if open_or_save not in ('open', 'save'):
+        raise ValueError(f"Argument open_or_save must be 'open' or 'save'. Input was {open_or_save}")
+
+    if not runs_in_repl_mode():
+        if open_or_save == 'open':
+            from tkinter.filedialog import askopenfilename
+            file_path = askopenfilename(title='please select the file name')
+        elif open_or_save == 'save':
+            from tkinter.filedialog import asksaveasfilename
+            file_path = asksaveasfilename(title='please set the file name to be saved')
+    else:
+        file_path = str(input_prompt(name='path/to/file'))
+        if open_or_save == 'open' and not Path(file_path).exists():
+            raise ValueError(f'{file_path} does not exist!')
+        if open_or_save == 'open' and not Path(file_path).is_file():
+            raise ValueError(f'{file_path} is not a file!')
+
+    return file_path
+
+
+# ______________________________________________________________________________________________________________________
+
+
 def determine_default_value_for_argparse(
         repl: bool, arg_name: tuple, choices: tuple = (None, ), default: object = None, enum: bool = False
 ) -> object:
