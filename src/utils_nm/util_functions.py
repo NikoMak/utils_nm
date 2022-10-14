@@ -159,12 +159,13 @@ def input_prompt(name: str, choices: tuple = (None, ), default: object = None, e
 # ______________________________________________________________________________________________________________________
 
 
-def prompt_file_name(open_or_save: str = 'open') -> str:
+def prompt_file_name(open_or_save: str = 'open', gui: bool = True) -> str:
     """
     Prompts the user to select a file.
 
     Args:
         open_or_save: whether it should prompt for an existing file (open) or to save a new file (save)
+        gui: whether to use tkinter gui or just plain input
 
     Returns:
         the path to the file
@@ -173,13 +174,16 @@ def prompt_file_name(open_or_save: str = 'open') -> str:
     if open_or_save not in ('open', 'save'):
         raise ValueError(f"Argument open_or_save must be 'open' or 'save'. Input was {open_or_save}")
 
-    if not runs_in_repl_mode():
+    if gui:
+        import tkinter as tk
+        window = tk.Tk()
+        window.wm_attributes('-topmost', 1)
         if open_or_save == 'open':
             from tkinter.filedialog import askopenfilename
-            file_path = askopenfilename(title='please select the file name')
+            file_path = askopenfilename(parent=window, title='please select the file name')
         elif open_or_save == 'save':
             from tkinter.filedialog import asksaveasfilename
-            file_path = asksaveasfilename(title='please set the file name to be saved')
+            file_path = asksaveasfilename(parent=window, title='please set the file name to be saved')
     else:
         file_path = str(input_prompt(name='path/to/file'))
         if open_or_save == 'open' and not Path(file_path).exists():

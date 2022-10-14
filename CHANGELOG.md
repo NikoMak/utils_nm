@@ -1,13 +1,18 @@
 # Changelog
 
 <!--
-## v0.5.2 (YYYY-MM-DD)
+## v0.5.3 (YYYY-MM-DD)
 ### Features
 - feat in ...
 
 ### Fix
 - fix in ...
 -->
+## v0.5.2 (2022-10-14)
+### Features
+- improved `prompt_file_name` to work properly in repl mode
+
+
 ## v0.5.1 (2022-10-14)
 ### Features
 - added util function: `prompt_file_name`
