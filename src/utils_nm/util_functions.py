@@ -178,6 +178,7 @@ def prompt_file_name(open_or_save: str = 'open', gui: bool = True) -> str:
         import tkinter as tk
         window = tk.Tk()
         window.wm_attributes('-topmost', 1)
+        window.withdraw()
         if open_or_save == 'open':
             from tkinter.filedialog import askopenfilename
             file_path = askopenfilename(parent=window, title='please select the file name')

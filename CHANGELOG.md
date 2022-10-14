@@ -1,13 +1,18 @@
 # Changelog
 
 <!--
-## v0.5.3 (YYYY-MM-DD)
+## v0.5.4 (YYYY-MM-DD)
 ### Features
 - feat in ...
 
 ### Fix
 - fix in ...
 -->
+## v0.5.3 (2022-10-14)
+### Fix
+- add call to `window.withdraw()` to hide the initialization of the gui box
+
+
 ## v0.5.2 (2022-10-14)
 ### Features
 - improved `prompt_file_name` to work properly in repl mode
