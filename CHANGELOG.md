@@ -8,6 +8,11 @@
 ### Fix
 - fix in ...
 -->
+## v0.5.5 (2022-10-19)
+### Fix
+- fix dependencies to `util_functions.input_prompt` due to new `message` argument
+
+
 ## v0.5.4 (2022-10-19)
 ### Features
 - improve `util_functions.input_prompt` to accept additional optional `message` argument

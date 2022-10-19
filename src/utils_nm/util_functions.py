@@ -230,13 +230,13 @@ def determine_default_value_for_argparse(
     arg_name = tuple(arg.lstrip('-') for arg in arg_name)
     determined_default = default
     if repl:
-        determined_default = input_prompt(arg_name[-1], choices, default, enum)
+        determined_default = input_prompt(arg_name[-1], choices=choices, default=default, enum=enum)
     else:
         if not check_if_in_argv(*arg_name):
             if default is not None:
                 determined_default = default
             else:
-                determined_default = input_prompt(arg_name[-1], choices, default, enum)
+                determined_default = input_prompt(arg_name[-1], choices=choices, default=default, enum=enum)
 
     return determined_default
 
