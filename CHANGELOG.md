@@ -1,13 +1,18 @@
 # Changelog
 
 <!--
-## v0.5.4 (YYYY-MM-DD)
+## v0.5.5 (YYYY-MM-DD)
 ### Features
 - feat in ...
 
 ### Fix
 - fix in ...
 -->
+## v0.5.4 (2022-10-19)
+### Features
+- improve `util_functions.input_prompt` to accept additional optional `message` argument
+
+
 ## v0.5.3 (2022-10-14)
 ### Fix
 - add call to `window.withdraw()` to hide the initialization of the gui box

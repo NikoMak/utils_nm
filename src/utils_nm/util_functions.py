@@ -115,12 +115,20 @@ def parse_bool(arg: str) -> bool:
 # ______________________________________________________________________________________________________________________
 
 
-def input_prompt(name: str, choices: tuple = (None, ), default: object = None, enum: bool = False) -> object:
+def input_prompt(
+        name: str,
+        message: str = None,
+        choices: tuple = (None, ),
+        default: object = None,
+        enum: bool = False
+) -> object:
     """
     wrapper for pythons input() with choices, default value and continuous prompting if an invalid input was supplied
 
     Args:
         name: the name of the variable
+        message: the custom message to be printed.
+                    If not None, name is omitted, else `please set the {name}:` will be printed
         choices: the allowed values for input. If None, anything can be input
         default: the default value. If None, the user will continue to be prompted
         enum: enumerate the choices and allow for numerical input
@@ -129,7 +137,10 @@ def input_prompt(name: str, choices: tuple = (None, ), default: object = None, e
         user input
     """
 
-    print(f'please set the {name}:')
+    if message is not None:
+        print(f'{message}:')
+    else:
+        print(f'please set the {name}:')
     inp = None
     if choices == (None, ) and default is None:
         inp = input()
