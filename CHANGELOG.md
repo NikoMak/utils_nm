@@ -1,13 +1,18 @@
 # Changelog
 
 <!--
-## v0.5.5 (YYYY-MM-DD)
+## v0.6.1 (YYYY-MM-DD)
 ### Features
 - feat in ...
 
 ### Fix
 - fix in ...
 -->
+## v0.6.0 (2022-10-23)
+### Fix
+- fix project dependencies
+
+
 ## v0.5.5 (2022-10-19)
 ### Fix
 - fix dependencies to `util_functions.input_prompt` due to new `message` argument
