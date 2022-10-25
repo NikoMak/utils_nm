@@ -1,13 +1,23 @@
 # Changelog
 
 <!--
-## v0.6.1 (YYYY-MM-DD)
+## v0.6.3 (YYYY-MM-DD)
 ### Features
 - feat in ...
 
 ### Fix
 - fix in ...
 -->
+## v0.6.2 (2022-10-25)
+### Features
+- improved verbosity of `util_functions.input_prompt`
+
+
+## v0.6.1 (2022-10-25)
+### Features
+- improved verbosity of `util_functions.input_prompt`
+
+
 ## v0.6.0 (2022-10-23)
 ### Fix
 - fix project dependencies

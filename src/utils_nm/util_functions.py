@@ -136,7 +136,7 @@ def input_prompt(
     Returns:
         user input
     """
-
+    print()
     if message is not None:
         print(f'{message}:')
     else:
@@ -151,7 +151,6 @@ def input_prompt(
         while inp not in choices:
             inp = input(f'\t-> choose between [{", ".join(str(e) for e in choices)}], defaults to: {default} ')
             inp = default if inp == '' else inp
-        print()
     else:
         available_choices = {i: item for i, item in enumerate(choices, start=1)}
         print('  choose from', end='')
@@ -163,6 +162,8 @@ def input_prompt(
 
         if inp.isdigit():
             inp = available_choices[int(inp)]
+    print(f'user input: {inp}')
+    print()
 
     return inp
 
