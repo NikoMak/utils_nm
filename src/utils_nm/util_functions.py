@@ -119,9 +119,10 @@ def input_prompt(
         name: str,
         message: str = None,
         choices: tuple = (None, ),
+        multi: bool = False,
         default: object = None,
         enum: bool = False
-) -> object:
+) -> str | list[str]:
     """
     wrapper for pythons input() with choices, default value and continuous prompting if an invalid input was supplied
 
@@ -130,6 +131,7 @@ def input_prompt(
         message: the custom message to be printed.
                     If not None, name is omitted, else `please set the {name}:` will be printed
         choices: the allowed values for input. If None, anything can be input
+        multi: whether to allow multiple selection (comma separated)
         default: the default value. If None, the user will continue to be prompted
         enum: enumerate the choices and allow for numerical input
 
@@ -141,27 +143,42 @@ def input_prompt(
         print(f'{message}:')
     else:
         print(f'please set the {name}:')
+
     inp = None
     if choices == (None, ) and default is None:
-        inp = input()
+        inp = input().strip()
+        if multi:
+            inp = [el.strip() for el in inp.split(',')]
     elif choices == (None, ) and default is not None:
-        inp = input(f'\t-> defaults to: {default}')
+        inp = input(f'\t-> defaults to: {default}').strip()
         inp = default if inp == '' else inp
+        if multi:
+            inp = [el.strip() for el in inp.split(',')]
     elif not enum:
-        while inp not in choices:
-            inp = input(f'\t-> choose between [{", ".join(str(e) for e in choices)}], defaults to: {default} ')
+        while inp is None or not set(inp).issubset(set(choices)):
+            inp = input(f'\t-> choose between [{", ".join(str(e) for e in choices)}], defaults to: {default} ').strip()
             inp = default if inp == '' else inp
+            if multi:
+                inp = [el.strip() for el in inp.split(',')]
     else:
         available_choices = {i: item for i, item in enumerate(choices, start=1)}
         print('  choose from', end='')
         print('\t', *available_choices.items(), sep='\n\t')
         print(f'  default will be {default}')
-        while not (inp in available_choices.values() or inp in [str(i) for i in available_choices.keys()] or inp == ''):
+        while not (False
+                   or set(inp).issubset(set(available_choices.values()))
+                   or set(inp).issubset(set([str(i) for i in available_choices.keys()]))
+                   or inp == ''):
             inp = input('\t-> enter the number or value of your choice ')
             inp = default if inp == '' else inp
+            if multi:
+                inp = [el.strip() for el in inp.split(',')]
 
-        if inp.isdigit():
+        if not multi and inp.isdigit():
             inp = available_choices[int(inp)]
+        elif multi and all(el.isdigit() for el in inp):
+            inp = [available_choices[int(el)] for el in inp]
+
     print(f'user input: {inp}')
     print()
 

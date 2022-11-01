@@ -1,13 +1,18 @@
 # Changelog
 
 <!--
-## v0.6.3 (YYYY-MM-DD)
+## v0.6.4 (YYYY-MM-DD)
 ### Features
 - feat in ...
 
 ### Fix
 - fix in ...
 -->
+## v0.6.3 (2022-11-01)
+### Features
+- extend capabilities of `util_functions.input_prompt` to accept multi user input
+
+
 ## v0.6.2 (2022-10-25)
 ### Features
 - improved verbosity of `util_functions.input_prompt`
