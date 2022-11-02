@@ -1,13 +1,18 @@
 # Changelog
 
 <!--
-## v0.6.5 (YYYY-MM-DD)
+## v0.6.6 (YYYY-MM-DD)
 ### Features
 - feat in ...
 
 ### Fix
 - fix in ...
 -->
+## v0.6.5 (2022-11-02)
+### Fix
+- fix while conditions in `util_functions.input_prompt`
+
+
 ## v0.6.4 (2022-11-02)
 ### Fix
 - fix while loop for enumerated input in `util_functions.input_prompt`

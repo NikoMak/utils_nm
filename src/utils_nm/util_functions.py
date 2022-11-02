@@ -155,24 +155,27 @@ def input_prompt(
         if multi:
             inp = [el.strip() for el in inp.split(',')]
     elif not enum:
-        while inp is None or not set(inp).issubset(set(choices)):
+        set_inp = set()
+        while inp is None or not set_inp.issubset(set(choices)):
             inp = input(f'\t-> choose between [{", ".join(str(e) for e in choices)}], defaults to: {default} ').strip()
             inp = default if inp == '' else inp
             if multi:
                 inp = [el.strip() for el in inp.split(',')]
+            set_inp = set(inp) if multi else {inp}
     else:
         available_choices = {i: item for i, item in enumerate(choices, start=1)}
         print('  choose from', end='')
         print('\t', *available_choices.items(), sep='\n\t')
         print(f'  default will be {default}')
-        while inp is None or not (False
-                                  or set(inp).issubset(set(available_choices.values()))
-                                  or set(inp).issubset(set([str(i) for i in available_choices.keys()]))
-                                  or inp == ''):
+        set_inp = set()
+        while inp is None or not (inp == ''
+                                  or set_inp.issubset(set(available_choices.values()))
+                                  or set_inp.issubset(set([str(i) for i in available_choices.keys()]))):
             inp = input('\t-> enter the number or value of your choice ')
             inp = default if inp == '' else inp
             if multi:
                 inp = [el.strip() for el in inp.split(',')]
+            set_inp = set(inp) if multi else {inp}
 
         if not multi and inp.isdigit():
             inp = available_choices[int(inp)]
