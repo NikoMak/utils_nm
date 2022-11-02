@@ -10,7 +10,7 @@ dependencies = [
     "psutil == 5.9.*",
 ]
 name = "utils_nm"
-version = "0.6.3"
+version = "0.6.4"
 authors = [
   { name="Nikola Maksimovic", email="nikola.maksimovic@outlook.com" },
 ]

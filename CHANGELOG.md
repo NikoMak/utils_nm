@@ -1,13 +1,18 @@
 # Changelog
 
 <!--
-## v0.6.4 (YYYY-MM-DD)
+## v0.6.5 (YYYY-MM-DD)
 ### Features
 - feat in ...
 
 ### Fix
 - fix in ...
 -->
+## v0.6.4 (2022-11-02)
+### Fix
+- fix while loop for enumerated input in `util_functions.input_prompt`
+
+
 ## v0.6.3 (2022-11-01)
 ### Features
 - extend capabilities of `util_functions.input_prompt` to accept multi user input

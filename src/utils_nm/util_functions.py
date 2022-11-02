@@ -165,10 +165,10 @@ def input_prompt(
         print('  choose from', end='')
         print('\t', *available_choices.items(), sep='\n\t')
         print(f'  default will be {default}')
-        while not (False
-                   or set(inp).issubset(set(available_choices.values()))
-                   or set(inp).issubset(set([str(i) for i in available_choices.keys()]))
-                   or inp == ''):
+        while inp is None or not (False
+                                  or set(inp).issubset(set(available_choices.values()))
+                                  or set(inp).issubset(set([str(i) for i in available_choices.keys()]))
+                                  or inp == ''):
             inp = input('\t-> enter the number or value of your choice ')
             inp = default if inp == '' else inp
             if multi:
