@@ -12,11 +12,51 @@ from pathlib import Path
 import typing
 import inspect
 
+from colorama import (
+    Fore,
+    Style,
+)
+
 import logging
 import warnings
 import traceback
 
 from datetime import datetime, timedelta
+
+
+# ______________________________________________________________________________________________________________________
+
+
+def print_yellow(*args, **kwargs) -> None:
+    """
+    colors the text yellow which will be printed
+
+    Args:
+        *args: arguments with are passed on to the builtin print function
+        **kwargs: keyword arguments with are passed on to the builtin print function
+
+    Returns:
+        None, but prints the text in yellow
+    """
+    sep = kwargs.pop('sep', ' ')
+    original_string = sep.join(str(stmt) for stmt in args)
+    print(f'{Fore.YELLOW}{original_string}{Style.RESET_ALL}', **kwargs)
+
+
+# ______________________________________________________________________________________________________________________
+
+
+def input_yellow(prompt: str) -> str:
+    """
+    colors the text yellow which will be printed by the prompt for input
+
+    Args:
+        prompt: the argument which will be passed on to the builtin function input
+
+    Returns:
+        the user input
+    """
+    return input(f'{Fore.YELLOW}{prompt}{Style.RESET_ALL}')
 
 
 # ______________________________________________________________________________________________________________________
@@ -140,9 +180,9 @@ def input_prompt(
     """
     print()
     if message is not None:
-        print(f'{message}:')
+        print_yellow(f'{message}:')
     else:
-        print(f'please set the {name}:')
+        print_yellow(f'please set the {name}:')
 
     inp = None
     if choices == (None, ) and default is None:
@@ -150,28 +190,30 @@ def input_prompt(
         if multi:
             inp = [el.strip() for el in inp.split(',')]
     elif choices == (None, ) and default is not None:
-        inp = input(f'\t-> defaults to: {default}').strip()
+        inp = input_yellow(f'\t-> defaults to: {default}').strip()
         inp = default if inp == '' else inp
         if multi:
             inp = [el.strip() for el in inp.split(',')]
     elif not enum:
         set_inp = set()
         while inp is None or not set_inp.issubset(set(choices)):
-            inp = input(f'\t-> choose between [{", ".join(str(e) for e in choices)}], defaults to: {default} ').strip()
+            inp = input_yellow(
+                f'\t-> choose between [{", ".join(str(e) for e in choices)}], defaults to: {default} '
+            ).strip()
             inp = default if inp == '' else inp
             if multi:
                 inp = [el.strip() for el in inp.split(',')]
             set_inp = set(inp) if multi else {inp}
     else:
         available_choices = {i: item for i, item in enumerate(choices, start=1)}
-        print('  choose from', end='')
-        print('\t', *available_choices.items(), sep='\n\t')
-        print(f'  default will be {default}')
+        print_yellow('  choose from', end='')
+        print_yellow('\t', *available_choices.items(), sep='\n\t')
+        print_yellow(f'  default will be {default}')
         set_inp = set()
         while inp is None or not (inp == ''
                                   or set_inp.issubset(set(available_choices.values()))
                                   or set_inp.issubset(set([str(i) for i in available_choices.keys()]))):
-            inp = input('\t-> enter the number or value of your choice ')
+            inp = input_yellow('\t-> enter the number or value of your choice ')
             inp = default if inp == '' else inp
             if multi:
                 inp = [el.strip() for el in inp.split(',')]
@@ -182,7 +224,7 @@ def input_prompt(
         elif multi and all(el.isdigit() for el in inp):
             inp = [available_choices[int(el)] for el in inp]
 
-    print(f'user input: {inp}')
+    print_yellow(f'user input: {inp}')
     print()
 
     return inp

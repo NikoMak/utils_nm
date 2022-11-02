@@ -8,6 +8,11 @@
 ### Fix
 - fix in ...
 -->
+## v0.6.6 (2022-11-02)
+### Features
+- add `print_yellow` and `input_yellow` to `ùtil_functions` and make use of them in `input_prompt`
+
+
 ## v0.6.5 (2022-11-02)
 ### Fix
 - fix while conditions in `util_functions.input_prompt`
