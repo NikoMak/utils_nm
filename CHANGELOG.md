@@ -1,13 +1,18 @@
 # Changelog
 
 <!--
-## v0.7.1 (YYYY-MM-DD)
+## v0.7.2 (YYYY-MM-DD)
 ### Features
 - feat in ...
 
 ### Fix
 - fix in ...
 -->
+## v0.7.1 (2022-11-17)
+### Fix
+- make `util_gui_classes.GuiPromptYesNo` topmost window
+
+
 ## v0.7.0 (2022-11-17)
 ### Features
 - add `split_text` to `util_function`

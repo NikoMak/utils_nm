@@ -140,6 +140,7 @@ class GuiPromptYesNo(customtkinter.CTk):
         if self.countdown_seconds > 0:
             self.countdown()
 
+        self.attributes('-topmost', True)
         self.mainloop()
 
     # __________________________________________________________
