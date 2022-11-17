@@ -1,16 +1,22 @@
 # Changelog
 
 <!--
-## v0.6.6 (YYYY-MM-DD)
+## v0.7.1 (YYYY-MM-DD)
 ### Features
 - feat in ...
 
 ### Fix
 - fix in ...
 -->
+## v0.7.0 (2022-11-17)
+### Features
+- add `split_text` to `util_function`
+- add new module `util_gui_classes` which includes `GuiPromptYesNo`, a class to prompt the user a gui based yes / no question with default value and countdown functionality 
+
+
 ## v0.6.6 (2022-11-02)
 ### Features
-- add `print_yellow` and `input_yellow` to `ùtil_functions` and make use of them in `input_prompt`
+- add `print_yellow` and `input_yellow` to `util_functions` and make use of them in `input_prompt`
 
 
 ## v0.6.5 (2022-11-02)

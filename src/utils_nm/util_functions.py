@@ -391,6 +391,44 @@ def chunker(seq: typing.Sequence, size: int) -> typing.Generator:
 # ______________________________________________________________________________________________________________________
 
 
+def split_text(text: str, n_chars: int = 50):
+    """
+    inserts `\n` into a long text at the first whitespace before `n_chars`.
+
+    Args:
+        text: the input text
+        n_chars: the maximum number of chars per line
+
+    Returns:
+        text with `\n` inserted
+    """
+
+    result = ''
+    start = 0
+    while True:
+        # loop exit condition
+        if len(text[start:]) <= n_chars:
+            result += text[start:]
+            break
+
+        # set the scope to analyse
+        sub_text = text[start:start+n_chars]
+
+        # first find the nearest whitespace to the end of text[:n_chars]
+        ws_pos = sub_text.rfind(' ')
+
+        # assembling the result string
+        result += text[start:start+ws_pos] + '\n'
+
+        # setting the new start point
+        start = start + ws_pos + 1
+
+    return result if result != '' else text
+
+
+# ______________________________________________________________________________________________________________________
+
+
 def last_day_of_month(any_date: datetime.date) -> datetime.date:
     """
     calculates the last day of the month for the supplied date
