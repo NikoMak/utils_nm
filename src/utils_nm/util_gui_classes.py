@@ -7,6 +7,7 @@ Classes which serve for gui applications.
 
 from typing import Any
 
+from _tkinter import TclError
 import tkinter
 import tkinter.messagebox
 import customtkinter
@@ -35,14 +36,13 @@ class GuiPromptYesNo(customtkinter.CTk):
 
     def __init__(self, question: str, default_value: str = 'no', countdown_seconds: int = 0):
         super().__init__()
+        self.terminated = False
 
         self.title('input required')
         self.geometry(f'{self.__class__.WIDTH}x{self.__class__.HEIGHT}')
         self.protocol('WM_DELETE_WINDOW', self.on_closing)  # call .on_closing() when app gets closed
         self.resizable(False, False)
 
-        if len(question) > 50:
-            question = split_text(text=question, n_chars=50)
         self.question = question
         self.answer = None
         self.default_value = default_value
@@ -157,28 +157,59 @@ class GuiPromptYesNo(customtkinter.CTk):
     def button_event(self, answer):
         """Stores the user input as instance attribute `answer`."""
         self.answer = answer
-        self.destroy()
+        self.terminate()
 
     def countdown(self):
-        """Starts the timer for the question."""
-        if self.remaining_seconds < 0:
+        """Sets the timer for the question."""
+        if self.answer is not None:
+            self.terminate()
+        elif self.remaining_seconds < 0:
             self.answer = self.default_value
-            self.destroy()
+            self.terminate()
         else:
             self.entry_timer.configure(textvariable=tkinter.StringVar(value=str(self.remaining_seconds)))
             self.remaining_seconds -= 1
             self.after(1000, self.countdown)
 
+    def stop_after_callbacks(self):
+        """Stops all after callbacks on the root."""
+        for after_id in self.tk.eval('after info').split():
+            self.after_cancel(after_id)
+
     def on_closing(self, event=0):
-        self.destroy()
+        """If the user presses the window x button without providing input"""
+        if self.answer is None and self.default_value is not None:
+            self.answer = self.default_value
+        self.terminate()
+
+    def terminate(self):
+        """Properly terminates the gui."""
+        # stop all .after callbacks to avoid error message "Invalid command ..." after destruction
+        self.stop_after_callbacks()
+
+        if not self.terminated:
+            self.terminated = True
+            try:
+                self.destroy()
+            except TclError:
+                self.destroy()
 
 
 # ______________________________________________________________________________________________________________________
 
 
 if __name__ == '__main__':
-    proceed = GuiPromptYesNo(question='do you want to proceed?', countdown_seconds=10)
-    print(f'{proceed.answer=}')
+    print('before')
+
+    q1 = GuiPromptYesNo(question='1. do you want to proceed?', countdown_seconds=5)
+    print(f'>>>{q1.answer=}')
+
+    print('between')
+
+    q2 = GuiPromptYesNo(question='2. do you want to proceed?', countdown_seconds=5)
+    print(f'>>>{q2.answer=}')
+
+    print('after')
 
 
 # ______________________________________________________________________________________________________________________
