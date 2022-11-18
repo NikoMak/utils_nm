@@ -1,13 +1,18 @@
 # Changelog
 
 <!--
-## v0.7.4 (YYYY-MM-DD)
+## v0.7.5 (YYYY-MM-DD)
 ### Features
 - feat in ...
 
 ### Fix
 - fix in ...
 -->
+## v0.7.4 (2022-11-18)
+### Refactor
+- refactor code
+
+
 ## v0.7.3 (2022-11-18)
 ### Features
 - re-add usage of text_split for `util_gui_classes.GuiPromptYesNo`

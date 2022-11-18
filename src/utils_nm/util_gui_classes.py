@@ -186,10 +186,10 @@ class GuiPromptYesNo(customtkinter.CTk):
 
     def terminate(self):
         """Properly terminates the gui."""
-        # stop all .after callbacks to avoid error message "Invalid command ..." after destruction
-        self.stop_after_callbacks()
-
         if not self.terminated:
+            # stop all .after callbacks to avoid error message "Invalid command ..." after destruction
+            self.stop_after_callbacks()
+
             self.terminated = True
             try:
                 self.destroy()
