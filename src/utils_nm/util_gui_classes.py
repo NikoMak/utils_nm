@@ -43,6 +43,8 @@ class GuiPromptYesNo(customtkinter.CTk):
         self.protocol('WM_DELETE_WINDOW', self.on_closing)  # call .on_closing() when app gets closed
         self.resizable(False, False)
 
+        if len(question) > 50:
+            question = split_text(text=question, n_chars=50)
         self.question = question
         self.answer = None
         self.default_value = default_value

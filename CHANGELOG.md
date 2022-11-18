@@ -1,13 +1,18 @@
 # Changelog
 
 <!--
-## v0.7.3 (YYYY-MM-DD)
+## v0.7.4 (YYYY-MM-DD)
 ### Features
 - feat in ...
 
 ### Fix
 - fix in ...
 -->
+## v0.7.3 (2022-11-18)
+### Features
+- re-add usage of text_split for `util_gui_classes.GuiPromptYesNo`
+
+
 ## v0.7.2 (2022-11-18)
 ### Fix
 - fix `util_gui_classes.GuiPromptYesNo` behaviour when using multiple times
