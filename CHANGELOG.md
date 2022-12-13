@@ -1,13 +1,18 @@
 # Changelog
 
 <!--
-## v0.7.5 (YYYY-MM-DD)
+## v0.7.6 (YYYY-MM-DD)
 ### Features
 - feat in ...
 
 ### Fix
 - fix in ...
 -->
+## v0.7.5 (2022-12-13)
+### Fix
+- fix in `util_gui_classes` by commenting out example usage code, which made trouble when importing the module in repl.
+
+
 ## v0.7.4 (2022-11-18)
 ### Refactor
 - refactor code
