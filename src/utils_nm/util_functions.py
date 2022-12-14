@@ -322,14 +322,14 @@ def create_logger(name: str, log_file_path: str | Path = None) -> logging.Logger
     logger = logging.getLogger(name)
     logger.setLevel(logging.DEBUG)
 
-    logging_console_formatter = logging.Formatter('%(levelname)s | %(message)s')
+    logging_console_formatter = logging.Formatter('%(levelname)-8s | %(message)s')
     logging_console_handler = logging.StreamHandler()
     logging_console_handler.setLevel(logging.DEBUG)
     logging_console_handler.setFormatter(logging_console_formatter)
     logger.addHandler(logging_console_handler)
 
     if log_file_path is not None:
-        logging_file_formatter = logging.Formatter('%(asctime)s | %(levelname)s | module: %(module)s | %(message)s')
+        logging_file_formatter = logging.Formatter('%(asctime)s | %(levelname)-8s | module: %(module)s | %(message)s')
         logging_file_handler = logging.FileHandler(log_file_path)
         logging_file_handler.setLevel(logging.INFO)
         logging_file_handler.setFormatter(logging_file_formatter)
