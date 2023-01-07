@@ -5,9 +5,12 @@
 Functions which serve for general purposes
 """
 
+import os
 import sys
 import psutil
 from pathlib import Path
+
+import re
 
 import typing
 import inspect
@@ -579,6 +582,19 @@ def calc_equidistant_weights(n: int) -> list:
         rng = [i for i in range(-(n // 2), n // 2 + 1)]
 
     return [round(1 / n + i * unidist, 10) for i in reversed(rng)]
+
+
+# ______________________________________________________________________________________________________________________
+
+
+yaml_env_resolver = re.compile(r'\${.+}')
+
+
+def yaml_env_constructor(loader, node):
+    value = node.value
+    match = yaml_env_resolver.match(value)
+    env_var = match.group()[2:-1]
+    return os.environ.get(env_var) + value[match.end():]
 
 
 # ______________________________________________________________________________________________________________________

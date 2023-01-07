@@ -1,13 +1,18 @@
 # Changelog
 
 <!--
-## v0.7.7 (YYYY-MM-DD)
+## v0.7.8 (YYYY-MM-DD)
 ### Features
 - feat in ...
 
 ### Fix
 - fix in ...
 -->
+## v0.7.7 (2023-01-07)
+### Features
+- add yaml implicit resolver and constructor helper for environment variables
+
+
 ## v0.7.6 (2022-12-14)
 ### Fix
 - format logger from `util_functions`
