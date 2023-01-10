@@ -20,9 +20,9 @@ from .util_functions import input_prompt
 # ______________________________________________________________________________________________________________________
 
 
-def create_db_engine(db_cfg: dict, db_conn_info: dict, db_name: str = None) -> tuple:
+def create_single_db_engine(db_cfg: dict, db_conn_info: dict, db_name: str = None) -> tuple:
     """
-    Opens a connection to a database you can choose or specify upfront
+    Establishes an engine to a single database you can choose or specify upfront
 
     Args:
         db_cfg: dictionary containing the configuration information for the database
@@ -33,7 +33,7 @@ def create_db_engine(db_cfg: dict, db_conn_info: dict, db_name: str = None) -> t
         a named tuple with the following fields: db_name, engine
     """
 
-    # db_cfg = cfg.Database.toDict(); db_conn_info = db_available; db_name = None; verbose = True
+    # db_cfg = cfg.Database.toDict(); db_conn_info = db_available; db_name = None;
 
     fields = ('db_name', 'engine')
     DB = namedtuple('DB', fields, defaults=(None,) * len(fields))
@@ -57,6 +57,45 @@ def create_db_engine(db_cfg: dict, db_conn_info: dict, db_name: str = None) -> t
     engine = sa.create_engine(conn_str, future=True)
 
     return DB(db_name=db_name, engine=engine)
+
+
+def create_multiple_db_engines(db_cfg: dict, db_conn_info: dict, db_name: list[str] = None) -> dict:
+    """
+    Establishes one or multiple engines to databases you can choose or specify upfront
+
+    Args:
+        db_cfg: dictionary containing the configuration information for the database
+        db_conn_info: dictionary with the available database names as keys and connection information as values
+        db_name: (optional) name of database, if None lets you choose from all available databases
+
+    Returns:
+        a dict with the db_name as key and the engine as value
+    """
+
+    # db_cfg = cfg.Database.toDict(); db_conn_info = db_available; db_name = None;
+
+    if not db_name or db_name == ['']:
+        db_name = input_prompt(
+            name='databases',
+            message=(
+                'to which dbs do you want to establish an engine'
+                '(you can set up multiple, by comma separating the input)?'
+            ),
+            choices=tuple(db_conn_info.keys()) + ('all',),
+            multi=True,
+            enum=True,
+        )
+
+    db = {}
+
+    if 'all' in db_name:
+        for name in db_conn_info.keys():
+            _, db[name] = create_single_db_engine(db_cfg, db_conn_info, db_name=name)
+    else:
+        for name in db_name:
+            _, db[name] = create_single_db_engine(db_cfg, db_conn_info, db_name=name)
+
+    return db
 
 
 # ______________________________________________________________________________________________________________________

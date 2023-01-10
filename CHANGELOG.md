@@ -1,13 +1,21 @@
 # Changelog
 
 <!--
-## v0.7.8 (YYYY-MM-DD)
+## v0.8.1 (YYYY-MM-DD)
 ### Features
 - feat in ...
 
 ### Fix
 - fix in ...
 -->
+## v0.8.0 (2023-01-10)
+### Features
+- add `create_multiple_db_engines` to `db_functions`
+
+### Refactor
+- rename `create_db_engine` to `create_single_db_engine` from `db_functions`
+
+
 ## v0.7.7 (2023-01-07)
 ### Features
 - add yaml implicit resolver and constructor helper for environment variables
