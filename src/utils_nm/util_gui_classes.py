@@ -75,14 +75,14 @@ class GuiPromptYesNo(customtkinter.CTk):
         self.label_question = customtkinter.CTkLabel(
             master=self.frame_label,
             text=self.question,
-            text_font=('Consolas',),
+            font=('Consolas', 12),
         )
         self.label_question.grid(row=1, column=0, columnspan=4, pady=5, padx=10)
 
         self.label_default_value = customtkinter.CTkLabel(
             master=self.frame_label,
             text='default value: ',
-            text_font=('Consolas',),
+            font=('Consolas', 12),
         )
         self.label_default_value.grid(row=3, column=0, pady=5, padx=10)
 
@@ -93,7 +93,7 @@ class GuiPromptYesNo(customtkinter.CTk):
             placeholder_text=self.default_value,
             state='disabled',
             textvariable=tkinter.StringVar(value=self.default_value),
-            text_font=('Consolas',),
+            font=('Consolas', 12),
         )
         self.entry_default_value.grid(row=3, column=1, pady=5, padx=10)
 
@@ -101,7 +101,7 @@ class GuiPromptYesNo(customtkinter.CTk):
             self.label_timer = customtkinter.CTkLabel(
                 master=self.frame_label,
                 text='timer [s]: ',
-                text_font=('Consolas',),
+                font=('Consolas', 12),
             )
             self.label_timer.grid(row=3, column=2, pady=5, padx=10)
 
@@ -112,7 +112,7 @@ class GuiPromptYesNo(customtkinter.CTk):
                 state='disabled',
                 textvariable=tkinter.StringVar(value=str(self.remaining_seconds)),
                 placeholder_text=str(self.remaining_seconds),
-                text_font=('Consolas',),
+                font=('Consolas', 12),
             )
             self.entry_timer.grid(row=3, column=3, pady=5, padx=10)
 
@@ -126,7 +126,7 @@ class GuiPromptYesNo(customtkinter.CTk):
         self.button_yes = customtkinter.CTkButton(
             master=self.frame_buttons,
             text='yes',
-            text_font=('Consolas',),
+            font=('Consolas', 12),
             command=lambda: self.button_event('yes'),
         )
         self.button_yes.grid(row=1, column=0, pady=5, padx=20)
@@ -134,7 +134,7 @@ class GuiPromptYesNo(customtkinter.CTk):
         self.button_no = customtkinter.CTkButton(
             master=self.frame_buttons,
             text='no',
-            text_font=('Consolas',),
+            font=('Consolas', 12),
             command=lambda: self.button_event('no'),
         )
         self.button_no.grid(row=1, column=1, pady=5, padx=20)

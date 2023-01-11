@@ -1,13 +1,18 @@
 # Changelog
 
 <!--
-## v0.8.1 (YYYY-MM-DD)
+## v0.8.2 (YYYY-MM-DD)
 ### Features
 - feat in ...
 
 ### Fix
 - fix in ...
 -->
+## v0.8.1 (2023-01-11)
+### Chore
+- update package dependencies
+
+
 ## v0.8.0 (2023-01-10)
 ### Features
 - add `create_multiple_db_engines` to `db_functions`

@@ -8,11 +8,10 @@ dependencies = [
     "pandas == 1.5.*",
     "tqdm == 4.64.*",
     "psutil == 5.9.*",
-    "customtkinter == 4.6.*",
-    "darkdetect == 0.7.*",
+    "customtkinter == 5.0.*",
 ]
 name = "utils_nm"
-version = "0.8.0"
+version = "0.8.1"
 authors = [
   { name="Nikola Maksimovic", email="nikola.maksimovic@outlook.com" },
 ]
