@@ -1,13 +1,18 @@
 # Changelog
 
 <!--
-## v0.8.2 (YYYY-MM-DD)
+## v0.8.3 (YYYY-MM-DD)
 ### Features
 - feat in ...
 
 ### Fix
 - fix in ...
 -->
+## v0.8.2 (2022-01-11)
+### Features
+- add support for oracle database
+
+
 ## v0.8.1 (2023-01-11)
 ### Chore
 - update package dependencies

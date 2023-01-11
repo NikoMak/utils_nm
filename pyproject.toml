@@ -11,7 +11,7 @@ dependencies = [
     "customtkinter == 5.0.*",
 ]
 name = "utils_nm"
-version = "0.8.1"
+version = "0.8.2"
 authors = [
   { name="Nikola Maksimovic", email="nikola.maksimovic@outlook.com" },
 ]

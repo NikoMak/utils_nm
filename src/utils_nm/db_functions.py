@@ -48,7 +48,7 @@ def create_single_db_engine(db_cfg: dict, db_conn_info: dict, db_name: str = Non
     conn_str = None
     if db_cfg[db_name]['type'] == 'MS SQL Server':
         conn_str = db_cfg[db_name]['driver'] + ':///?odbc_connect='
-    elif db_cfg[db_name]['type'] in ('MariaDB', 'PostgreSQL'):
+    elif db_cfg[db_name]['type'] in ('MariaDB', 'PostgreSQL', 'Oracle'):
         conn_str = db_cfg[db_name]['driver'] + '://'
     elif db_cfg[db_name]['type'] == 'SQLite3':
         conn_str = db_cfg[db_name]['driver'] + ':///'
