@@ -30,6 +30,25 @@ from datetime import datetime, timedelta
 # ______________________________________________________________________________________________________________________
 
 
+def isnone(obj: typing.Any, replacement: typing.Any) -> typing.Any:
+    """
+    mimics the sql isnull() function
+
+    Args:
+        obj: input object
+        replacement: replacement object if input object is None
+
+    Returns:
+        replacement if obj is None else obj
+    """
+    if obj is None:
+        return replacement
+    return obj
+
+
+# ______________________________________________________________________________________________________________________
+
+
 def print_yellow(*args, **kwargs) -> None:
     """
     colors the text yellow which will be printed
@@ -531,6 +550,7 @@ def clean_umlauts(s: str | list) -> str | list:
         'Ç': 'C',
         'Ć': 'C',
         'Č': 'C',
+        'Ë': 'E',
 
         'ä': 'ae',
         'ü': 'ue',
@@ -543,7 +563,8 @@ def clean_umlauts(s: str | list) -> str | list:
         'ê': 'e',
         'ç': 'c',
         'ć': 'c',
-        'č': 'c'
+        'č': 'c',
+        'ë': 'e',
     }
 
     for key, val in d_trans.items():

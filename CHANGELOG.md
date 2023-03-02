@@ -8,6 +8,12 @@
 ### Fix
 - fix in ...
 -->
+## v0.8.3 (2023-03-02)
+### Features
+- add `isnone` to `util_functions`
+- add additional umlaut to `clean_umlauts` from `util_functions`
+
+
 ## v0.8.2 (2022-01-11)
 ### Features
 - add support for oracle database
