@@ -5,6 +5,8 @@
 Functions which serve for general purposes
 """
 
+from warnings import warn
+
 import os
 import sys
 import psutil
@@ -30,7 +32,7 @@ from datetime import datetime, timedelta
 # ______________________________________________________________________________________________________________________
 
 
-def isnone(obj: typing.Any, replacement: typing.Any) -> typing.Any:
+def replace_none(obj: typing.Any, replacement: typing.Any) -> typing.Any:
     """
     mimics the sql isnull() function
 
@@ -537,6 +539,7 @@ def clean_umlauts(s: str | list) -> str | list:
         input object with replaced umlauts
     """
 
+    warn('deprecation warning: use unidecode instead. Install it with >>> pip install unidecode')
     d_trans = {
         'Ä': 'Ae',
         'Ü': 'Ue',

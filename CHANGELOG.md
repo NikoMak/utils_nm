@@ -1,13 +1,19 @@
 # Changelog
 
 <!--
-## v0.8.3 (YYYY-MM-DD)
+## v0.8.5 (YYYY-MM-DD)
 ### Features
 - feat in ...
 
 ### Fix
 - fix in ...
 -->
+## v0.8.4 (2023-03-09)
+### Refactors
+- rename `isnone()` to `replace_none()`
+- add deprecation warning to `clean_umlauts`
+
+
 ## v0.8.3 (2023-03-02)
 ### Features
 - add `isnone` to `util_functions`
