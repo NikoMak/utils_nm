@@ -4,14 +4,14 @@ build-backend = "setuptools.build_meta"
 
 [project]
 dependencies = [
-    "SQLAlchemy == 1.4.*",
+    "SQLAlchemy == 2.*",
     "pandas == 1.5.*",
-    "tqdm == 4.64.*",
+    "tqdm == 4.65.*",
     "psutil == 5.9.*",
-    "customtkinter == 5.0.*",
+    "customtkinter == 5.1.*",
 ]
 name = "utils_nm"
-version = "0.8.4"
+version = "1.0.0"
 authors = [
   { name="Nikola Maksimovic", email="nikola.maksimovic@outlook.com" },
 ]

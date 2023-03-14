@@ -54,7 +54,7 @@ def create_single_db_engine(db_cfg: dict, db_conn_info: dict, db_name: str = Non
         conn_str = db_cfg[db_name]['driver'] + ':///'
     conn_str += str(db_conn_info[db_name])
 
-    engine = sa.create_engine(conn_str, future=True)
+    engine = sa.create_engine(conn_str)
 
     return DB(db_name=db_name, engine=engine)
 
