@@ -27,6 +27,9 @@ import warnings
 import traceback
 
 from datetime import datetime, timedelta
+import dateutil
+
+import pandas as pd
 
 
 # ______________________________________________________________________________________________________________________
@@ -152,6 +155,28 @@ def check_if_in_argv(arg, argument) -> bool:
     """
     import sys
     return f'-{arg}' in sys.argv or f'--{argument}' in sys.argv
+
+
+# ______________________________________________________________________________________________________________________
+
+
+def convert_to_datetime(s: str) -> datetime:
+    """
+    convert a string input to python native datetime object
+
+    Args:
+        s: input string
+
+    Returns:
+        datetime object or pd.NaT if input is pd.isna()
+    """
+    if pd.isna(s):
+        return pd.NaT
+    elif isinstance(s, pd.Timestamp):
+        return s.to_pydatetime()
+    elif isinstance(s, datetime):
+        return s
+    return dateutil.parser.parse(s)
 
 
 # ______________________________________________________________________________________________________________________

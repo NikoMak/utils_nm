@@ -1,13 +1,18 @@
 # Changelog
 
 <!--
-## v1.0.1 (YYYY-MM-DD)
+## v1.0.2 (YYYY-MM-DD)
 ### Features
 - feat in ...
 
 ### Fix
 - fix in ...
 -->
+## v1.0.1 (2023-03-17)
+### Features
+- add `convert_to_datetime` in `util_functions`
+
+
 ## v1.0.0 (2023-03-14)
 ### Features
 - update code to use sqlalchemy 2.0
