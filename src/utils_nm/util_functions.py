@@ -378,7 +378,9 @@ def create_logger(name: str, log_file_path: str | Path = None) -> logging.Logger
     logger.addHandler(logging_console_handler)
 
     if log_file_path is not None:
-        logging_file_formatter = logging.Formatter('%(asctime)s | %(levelname)-8s | module: %(module)s | %(message)s')
+        logging_file_formatter = logging.Formatter(
+            '%(asctime)s | %(levelname)-8s | module: %(module)-25s | %(message)s'
+        )
         logging_file_handler = logging.FileHandler(log_file_path)
         logging_file_handler.setLevel(logging.INFO)
         logging_file_handler.setFormatter(logging_file_formatter)
