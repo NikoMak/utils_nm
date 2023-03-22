@@ -322,7 +322,12 @@ def prompt_file_name(open_or_save: str = 'open', gui: bool = True) -> str:
 
 
 def determine_default_value_for_argparse(
-        repl: bool, arg_name: tuple, choices: tuple = (None, ), default: object = None, enum: bool = False
+        repl: bool,
+        arg_name: tuple,
+        arg_base_type: str = 'str',
+        choices: tuple = (None, ),
+        default: object = None,
+        enum: bool = False,
 ) -> object:
     """
     only use for argparse.add_argument default value
@@ -331,6 +336,7 @@ def determine_default_value_for_argparse(
     Args:
         repl: whether the script is executed in interactive repl (read-evaluate-print-loop) mode
         arg_name: the name of the arguments, e.g. ('-arg', '--argument')
+        arg_base_type: the base type of the input (if arg is a list, then arg_base_type is the type of the elements)
         choices: the allowed values for input. If None, anything can be input
         default: the default value. If None, the user will continue to be prompted
         enum: enumerate the choices and allow for numerical input
@@ -343,6 +349,12 @@ def determine_default_value_for_argparse(
     determined_default = default
     if repl:
         determined_default = input_prompt(arg_name[-1], choices=choices, default=default, enum=enum)
+        if arg_base_type == 'int':
+            determined_default = [int(el) for el in determined_default.split()]
+        elif arg_base_type == 'float':
+            determined_default = [float(el) for el in determined_default.split()]
+        elif arg_base_type == 'bool':
+            determined_default = [bool(el) for el in determined_default.split()]
     else:
         if not check_if_in_argv(*arg_name):
             if default is not None:
