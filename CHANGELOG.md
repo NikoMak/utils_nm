@@ -1,13 +1,18 @@
 # Changelog
 
 <!--
-## v1.0.4 (YYYY-MM-DD)
+## v1.0.5 (YYYY-MM-DD)
 ### Features
 - feat in ...
 
 ### Fix
 - fix in ...
 -->
+## v1.0.4 (2023-03-22)
+### Fix
+- improve `determine_default_value_for_argparse` in `util_functions` for parsing in repl mode
+
+
 ## v1.0.3 (2023-03-22)
 ### Features
 - improve `determine_default_value_for_argparse` in `util_functions` for parsing in repl mode

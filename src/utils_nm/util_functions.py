@@ -349,11 +349,11 @@ def determine_default_value_for_argparse(
     determined_default = default
     if repl:
         determined_default = input_prompt(arg_name[-1], choices=choices, default=default, enum=enum)
-        if arg_base_type == 'int':
+        if arg_base_type == 'int' and len(determined_default) > 0:
             determined_default = [int(el) for el in determined_default.split()]
-        elif arg_base_type == 'float':
+        elif arg_base_type == 'float' and len(determined_default) > 0:
             determined_default = [float(el) for el in determined_default.split()]
-        elif arg_base_type == 'bool':
+        elif arg_base_type == 'bool' and len(determined_default) > 0:
             determined_default = [bool(el) for el in determined_default.split()]
     else:
         if not check_if_in_argv(*arg_name):
