@@ -390,6 +390,11 @@ def create_logger(name: str, log_file_path: str | Path = None) -> logging.Logger
     logger.addHandler(logging_console_handler)
 
     if log_file_path is not None:
+        if isinstance(log_file_path, str):
+            log_file_path = Path(log_file_path)
+        if not log_file_path.exists():
+            log_file_path.parent.mkdir(parents=True, exist_ok=True)
+            log_file_path.touch(exist_ok=True)
         logging_file_formatter = logging.Formatter(
             '%(asctime)s | %(levelname)-8s | module: %(module)-25s | %(message)s'
         )
