@@ -5,13 +5,13 @@ build-backend = "setuptools.build_meta"
 [project]
 dependencies = [
     "SQLAlchemy == 2.*",
-    "pandas == 1.5.*",
-    "tqdm == 4.65.*",
-    "psutil == 5.9.*",
-    "customtkinter == 5.1.*",
+    "pandas == 2.*",
+    "tqdm == 4.*",
+    "psutil == 5.*",
+    "customtkinter == 5.*",
 ]
 name = "utils_nm"
-version = "1.0.5"
+version = "1.0.6"
 authors = [
   { name="Nikola Maksimovic", email="nikola.maksimovic@outlook.com" },
 ]

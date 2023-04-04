@@ -1,13 +1,18 @@
 # Changelog
 
 <!--
-## v1.0.6 (YYYY-MM-DD)
+## v1.0.7 (YYYY-MM-DD)
 ### Features
 - feat in ...
 
 ### Fix
 - fix in ...
 -->
+## v1.0.6 (2023-04-04)
+### Chore
+- update dependency to pandas 2.*
+
+
 ## v1.0.5 (2023-03-23)
 ### Fix
 - add logfile creation logic to `create_logger` from `util_functions`
