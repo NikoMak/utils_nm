@@ -27,7 +27,7 @@ import warnings
 import traceback
 
 from datetime import datetime, timedelta
-import dateutil
+from dateutil import parser as dateutil_parser
 
 import pandas as pd
 
@@ -160,7 +160,7 @@ def check_if_in_argv(arg, argument) -> bool:
 # ______________________________________________________________________________________________________________________
 
 
-def convert_to_datetime(s: str) -> datetime:
+def convert_to_datetime(s: str) -> datetime | pd.NaT:
     """
     convert a string input to python native datetime object
 
@@ -176,7 +176,7 @@ def convert_to_datetime(s: str) -> datetime:
         return s.to_pydatetime()
     elif isinstance(s, datetime):
         return s
-    return dateutil.parser.parse(s)
+    return dateutil_parser.parse(s)
 
 
 # ______________________________________________________________________________________________________________________
