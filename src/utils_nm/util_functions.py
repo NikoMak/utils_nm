@@ -160,7 +160,7 @@ def check_if_in_argv(arg, argument) -> bool:
 # ______________________________________________________________________________________________________________________
 
 
-def convert_to_datetime(s: str) -> datetime | pd.NaT:
+def convert_to_datetime(s: str) -> datetime:
     """
     convert a string input to python native datetime object
 

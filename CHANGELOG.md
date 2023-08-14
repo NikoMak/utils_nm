@@ -1,13 +1,18 @@
 # Changelog
 
 <!--
-## v1.0.8 (YYYY-MM-DD)
+## v1.0.9 (YYYY-MM-DD)
 ### Features
 - feat in ...
 
 ### Fix
 - fix in ...
 -->
+## v1.0.8 (2023-08-14)
+### Fix
+- fix TypeError in function definition
+
+
 ## v1.0.7 (2023-08-12)
 ### Features
 - add `data_functions` module and implement `stack_temporal_dataframe` and `unstack_temporal_dataframe`
