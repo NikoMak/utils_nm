@@ -5,6 +5,7 @@ This package contains utility objects like functions and classes.
 
 The following modules can be imported:
 - db_functions: functions for database operations
+- data_functions: functions specific for data transformation with pandas
 - orm_models: sqlalchemy orm models for logging purposes of job executions
 - util_classes: useful classes
 - util_functions: useful functions
