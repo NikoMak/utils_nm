@@ -1,13 +1,18 @@
 # Changelog
 
 <!--
-## v1.0.10 (YYYY-MM-DD)
+## v1.0.11 (YYYY-MM-DD)
 ### Features
 - feat in ...
 
 ### Fix
 - fix in ...
 -->
+## v1.0.10 (2023-08-22)
+### Fix
+- fix in dtype casting in `data_functions` `stack_temporal_data` and `unstack_temporal_data`
+
+
 ## v1.0.9 (2023-08-14)
 ### Features
 - implement dtype casting in `data_functions.stack_temporal_data`

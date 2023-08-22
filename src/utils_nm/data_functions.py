@@ -59,7 +59,7 @@ def stack_temporal_dataframe(
     df_output.reset_index(drop=True, inplace=True)
     # recast to original dtypes from input df
     for col, dtype in df.dtypes.items():
-        if col != 'temporal_column' and df_output[col].dtype != dtype:
+        if col in df_output.columns and col != 'temporal_column' and df_output[col].dtype != dtype:
             df_output[col] = df_output[col].astype(dtype)
 
     return df_output
@@ -159,7 +159,7 @@ def unstack_temporal_dataframe(
     df_output.reset_index(drop=True, inplace=True)
     # recast to original dtypes from input df
     for col, dtype in df.dtypes.items():
-        if col != temporal_column and df_output[col].dtype != dtype:
+        if col in df_output.columns and col != temporal_column and df_output[col].dtype != dtype:
             df_output[col] = df_output[col].astype(dtype)
 
     return df_output
