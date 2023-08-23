@@ -349,6 +349,15 @@ def determine_default_value_for_argparse(
     determined_default = default
     if repl:
         determined_default = input_prompt(arg_name[-1], choices=choices, default=default, enum=enum)
+        if isinstance(determined_default, list):
+            determined_default = ' '.join(str(el) for el in determined_default)
+        elif isinstance(determined_default, str):
+            try:
+                if isinstance(eval(determined_default), list):
+                    determined_default = eval(determined_default)
+                    determined_default = ' '.join(str(el) for el in determined_default)
+            except (NameError, SyntaxError):
+                pass
         if arg_base_type == 'int' and len(determined_default) > 0:
             determined_default = [int(el) for el in determined_default.split()]
         elif arg_base_type == 'float' and len(determined_default) > 0:
