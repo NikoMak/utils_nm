@@ -350,7 +350,8 @@ def determine_default_value_for_argparse(
     if repl:
         determined_default = input_prompt(arg_name[-1], choices=choices, default=default, enum=enum)
         if isinstance(determined_default, list):
-            determined_default = ' '.join(str(el) for el in determined_default)
+            if len(determined_default):
+                determined_default = ' '.join(str(el) for el in determined_default)
         elif isinstance(determined_default, str):
             try:
                 if isinstance(eval(determined_default), list):

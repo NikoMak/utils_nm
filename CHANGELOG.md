@@ -1,13 +1,18 @@
 # Changelog
 
 <!--
-## v1.0.12 (YYYY-MM-DD)
+## v1.0.13 (YYYY-MM-DD)
 ### Features
 - feat in ...
 
 ### Fix
 - fix in ...
 -->
+## v1.0.12 (YYYY-MM-DD)
+### Fix
+- fix in default argument evaluation for argparse in `util_functions.determine_default_value_for_argparse`
+
+
 ## v1.0.11 (2023-08-23)
 ### Features
 - improve default argument evaluation for argparse in `util_functions.determine_default_value_for_argparse`
