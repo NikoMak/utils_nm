@@ -5,6 +5,10 @@
 Functions which serve for data transformation purposes
 """
 
+from typing import (
+    Literal,
+)
+
 import itertools
 
 from tqdm import tqdm
@@ -161,6 +165,55 @@ def unstack_temporal_dataframe(
     for col, dtype in df.dtypes.items():
         if col in df_output.columns and col != temporal_column and df_output[col].dtype != dtype:
             df_output[col] = df_output[col].astype(dtype)
+
+    return df_output
+
+
+# ______________________________________________________________________________________________________________________
+
+
+def transform_long_wide(
+        df: pd.DataFrame,
+        direction: Literal['long_to_wide', 'wide_to_long'],
+        index_columns: list,
+        wtl_columns: list | None,
+        measure_names: str | list,
+        measure_values: str | list,
+) -> pd.DataFrame:
+    """
+    Transforms a dataframe according to direction long_to_wide or wide_to_long using pivot and melt under the hood.
+
+    Args:
+        df:             dataframe
+        direction:      whether to go from long to wide (pivot) or from wide to long (melt)
+        index_columns:  list of columns to group by
+        wtl_columns:    wtl only -> list of columns to use as values to melt from wide to long format
+        measure_names:  ltw -> name(s) of column(s) to pivot ;
+                        wtl -> name to use for the variable column
+        measure_values: ltw -> name(s) of column(s) with values to populate the pivot columns ;
+                        wtl -> name to use for the value column
+
+    Returns:
+        transformed dataframe
+    """
+    if direction == 'long_to_wide':
+        df_output = pd.pivot(
+            df,
+            columns=measure_names,
+            values=measure_values,
+            index=index_columns,
+        ).reset_index()
+    elif direction == 'wide_to_long':
+        df_output = pd.melt(
+            df,
+            id_vars=index_columns,
+            value_vars=wtl_columns,
+            var_name=measure_names,
+            value_name=measure_values,
+            ignore_index=True,
+        )
+    else:
+        raise ValueError(f'direction should be "long_to_wide" or "wide_to_long", you specified {direction}!')
 
     return df_output
 
