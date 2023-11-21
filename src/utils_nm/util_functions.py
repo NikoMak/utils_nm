@@ -35,6 +35,33 @@ import pandas as pd
 # ______________________________________________________________________________________________________________________
 
 
+def inverse_non_unique_dict(d: dict) -> dict:
+    """
+    Inverse a non-unique dict by using a list as values
+
+    Args:
+        d: input dictionary
+
+    Returns:
+        inverse dictionary
+    """
+    result = dict()
+    for key, value in d.items():
+        result.setdefault(value, []).append(key)
+    return result
+
+
+# ______________________________________________________________________________________________________________________
+
+
+def warning_on_one_line(message, category, filename, lineno, file=None, line=None):
+    """Use at beginning of script `warnings.formatwarning = util_functions.warning_on_one_line`"""
+    return f'{filename}:{lineno}: {category.__name__}: {message}\n'
+
+
+# ______________________________________________________________________________________________________________________
+
+
 def replace_none(obj: typing.Any, replacement: typing.Any) -> typing.Any:
     """
     mimics the sql isnull() function
