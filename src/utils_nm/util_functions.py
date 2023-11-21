@@ -309,17 +309,28 @@ def input_prompt(
 # ______________________________________________________________________________________________________________________
 
 
-def prompt_file_name(open_or_save: str = 'open', gui: bool = True) -> str:
+def prompt_file_name(open_or_save: str = 'open', gui: bool = True, initial_directory: Path | str = None) -> str:
     """
     Prompts the user to select a file.
 
     Args:
-        open_or_save: whether it should prompt for an existing file (open) or to save a new file (save)
-        gui: whether to use tkinter gui or just plain input
+        open_or_save:       whether it should prompt for an existing file (open) or to save a new file (save)
+        gui:                whether to use tkinter gui or just plain input
+        initial_directory:  location where to open the gui browser in
 
     Returns:
         the path to the file
     """
+    if initial_directory is not None and not isinstance(initial_directory, Path):
+        initial_directory = Path(initial_directory)
+        if not initial_directory.exists():
+            warning_on_one_line(
+                message='The provided initial_directory path does not exist. Reverting to default location.',
+                category=UserWarning,
+                filename='util_functions.py',
+                lineno=312,
+            )
+
     file_path = None
     if open_or_save not in ('open', 'save'):
         raise ValueError(f"Argument open_or_save must be 'open' or 'save'. Input was {open_or_save}")
@@ -331,10 +342,18 @@ def prompt_file_name(open_or_save: str = 'open', gui: bool = True) -> str:
         window.withdraw()
         if open_or_save == 'open':
             from tkinter.filedialog import askopenfilename
-            file_path = askopenfilename(parent=window, title='please select the file name')
+            file_path = askopenfilename(
+                initialdir=initial_directory,
+                parent=window,
+                title='please select the file name'
+            )
         elif open_or_save == 'save':
             from tkinter.filedialog import asksaveasfilename
-            file_path = asksaveasfilename(parent=window, title='please set the file name to be saved')
+            file_path = asksaveasfilename(
+                initialdir=initial_directory,
+                parent=window,
+                title='please set the file name to be saved'
+            )
     else:
         file_path = str(input_prompt(name='path/to/file'))
         if open_or_save == 'open' and not Path(file_path).exists():

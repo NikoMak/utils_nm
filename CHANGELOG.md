@@ -1,13 +1,18 @@
 # Changelog
 
 <!--
-## v1.0.15 (YYYY-MM-DD)
+## v1.0.16 (YYYY-MM-DD)
 ### Features
 - feat in ...
 
 ### Fix
 - fix in ...
 -->
+## v1.0.15 (2023-11-21)
+### Features
+- improve `prompt_file_name` with initial_directory parameter
+
+
 ## v1.0.14 (2023-09-22)
 ### Features
 - add `inverse_non_unique_dict` and `warning_on_one_line` to `util_functions` module
