@@ -81,6 +81,22 @@ def replace_none(obj: typing.Any, replacement: typing.Any) -> typing.Any:
 # ______________________________________________________________________________________________________________________
 
 
+def swap_dict_hierarchy(d: dict) -> dict:
+    """
+    Swap the hierarchy of two levels of dict keys.
+
+    Args:
+        d:  input dictionary, must be of form {key1: {keyA: values,  keyB: values, ...}, key2: {keyA: values, ...}, ...}
+
+    Returns:
+        new dict with swapped key hierarchy {keyA: {key1: values, key2: values, ...}, keyB: {key1, values, ...}, ...}
+    """
+    return {key2: {key1: d[key1][key2] for key1 in d} for key2 in d[next(iter(d))]}
+
+
+# ______________________________________________________________________________________________________________________
+
+
 def print_yellow(*args, **kwargs) -> None:
     """
     colors the text yellow which will be printed

@@ -1,13 +1,18 @@
 # Changelog
 
 <!--
-## v1.0.16 (YYYY-MM-DD)
+## v1.0.17 (YYYY-MM-DD)
 ### Features
 - feat in ...
 
 ### Fix
 - fix in ...
 -->
+## v1.0.16 (2023-12-07)
+### Features
+- implement `swap_dict_hierarchy` in `util_functions`
+
+
 ## v1.0.15 (2023-11-21)
 ### Features
 - improve `prompt_file_name` with initial_directory parameter
